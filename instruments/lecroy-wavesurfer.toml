@@ -1,0 +1,86 @@
+[instrument]
+slug = "lecroy-wavesurfer"
+name = "LeCroy WaveSurfer"
+manufacturer = "LeCroy"
+type = "oscilloscope"
+interfaces = ["ethernet", "usb"]
+manual = "https://cdn.teledynelecroy.com/files/manuals/wavesurfer-3000z-om-e-revb.pdf"
+github = "https://github.com/lucasgerads/lecroy-mcp"
+
+[interface.ethernet]
+protocol = "vxi-11"
+default_port = 1861
+
+[interface.usb]
+protocol = "visa"
+example_resource = "USB0::0x05FF::0x1023::12345::INSTR"
+
+[setup]
+steps = [
+  { text = "Connect the oscilloscope to your network via the Ethernet port on the rear panel, or to your computer via USB" },
+  { text = "For Ethernet: note the IP address shown in Utilities > Ethernet & IP" },
+  { text = "For USB: note the VISA resource string shown in your VISA resource manager (e.g. USB0::0x05FF::0x1023::12345::INSTR)" },
+]
+
+[[mcp.packages]]
+package = "lecroy-mcp"
+author = "lucasgerads"
+language = "python"
+distribution = "pypi"
+install = "uvx lecroy-mcp"
+command = "uvx lecroy-mcp"
+description = "Original implementation"
+url = "https://pypi.org/project/lecroy-mcp/"
+
+[[mcp.config.params]]
+key = "LECROY_HOST"
+description = "IP address of the oscilloscope (Ethernet connection)"
+example = "192.168.1.111"
+required = false
+type = "string"
+
+[[mcp.config.params]]
+key = "LECROY_RESOURCE"
+description = "VISA resource string (USB connection)"
+example = "USB0::0x05FF::0x1023::12345::INSTR"
+required = false
+type = "string"
+
+[[mcp.config.params]]
+key = "LECROY_SUBNET"
+description = "Subnet for auto-discovery of the oscilloscope (e.g. 192.168.1.0/24)"
+example = "192.168.1.0/24"
+required = false
+type = "string"
+
+[[mcp.config.params]]
+key = "LECROY_PROBE_C1"
+description = "Probe attenuation ratio for channel 1 (e.g. 10 for 10x probe, 'none' to skip)"
+example = "10"
+required = false
+default = "none"
+type = "string"
+
+[[mcp.config.params]]
+key = "LECROY_PROBE_C2"
+description = "Probe attenuation ratio for channel 2"
+example = "10"
+required = false
+default = "none"
+type = "string"
+
+[[mcp.config.params]]
+key = "LECROY_PROBE_C3"
+description = "Probe attenuation ratio for channel 3"
+example = "10"
+required = false
+default = "none"
+type = "string"
+
+[[mcp.config.params]]
+key = "LECROY_PROBE_C4"
+description = "Probe attenuation ratio for channel 4"
+example = "10"
+required = false
+default = "none"
+type = "string"

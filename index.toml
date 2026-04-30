@@ -1,0 +1,15 @@
+[[instruments]]
+slug = "pm5190"
+name = "Philips PM5190"
+manufacturer = "Philips"
+type = "function-generator"
+interfaces = ["gpib"]
+file = "instruments/pm5190.toml"
+
+[[instruments]]
+slug = "lecroy-wavesurfer"
+name = "LeCroy WaveSurfer"
+manufacturer = "LeCroy"
+type = "oscilloscope"
+interfaces = ["ethernet", "usb"]
+file = "instruments/lecroy-wavesurfer.toml"

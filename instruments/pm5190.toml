@@ -1,0 +1,57 @@
+[instrument]
+slug = "pm5190"
+name = "Philips PM5190"
+manufacturer = "Philips"
+type = "function-generator"
+year = 1985
+interfaces = ["gpib"]
+frequency_range = [0.001, 2_000_000]
+amplitude_range = [0.001, 19.9]
+manual = "https://www.manualslib.com/manual/3581428/Philips-Pm5190.html"
+image = "https://raw.githubusercontent.com/lucasgerads/pm5190-mcp/main/docu/assets/demo-pm5190-small.gif"
+github = "https://github.com/lucasgerads/pm5190-mcp"
+
+[interface.gpib]
+default_address = 4
+address_range = [0, 30]
+adapter = "prologix-compatible"
+
+[setup]
+steps = [
+  { text = "Set the GPIB address using the DIP switches on the bottom of the unit", image = "https://raw.githubusercontent.com/lucasgerads/pm5190-mcp/main/docu/assets/SettingAddress.png" },
+  { text = "Connect the Prologix-compatible adapter to the instrument's GPIB port and to a USB port on your computer" },
+  { text = "Note the serial port assigned to the adapter (e.g. /dev/ttyUSB0 on Linux, COM3 on Windows)" },
+]
+
+[[mcp.packages]]
+package = "pm5190-mcp"
+author = "lucasgerads"
+language = "python"
+distribution = "pypi"
+install = "uvx pm5190-mcp"
+command = "uvx pm5190-mcp"
+description = "Original implementation"
+url = "https://pypi.org/project/pm5190-mcp/"
+
+[[mcp.config.params]]
+key = "PM5190_PORT"
+description = "Serial port the GPIB adapter is connected to"
+example = "/dev/ttyUSB0"
+required = true
+type = "string"
+
+[[mcp.config.params]]
+key = "PM5190_ADDR"
+description = "GPIB address (0–30), set via DIP switches on the bottom of the unit"
+example = "4"
+required = false
+default = "4"
+type = "integer"
+
+[[mcp.config.params]]
+key = "PM5190_BAUD"
+description = "Baud rate of the serial adapter (usually 115200)"
+example = "115200"
+required = false
+default = "115200"
+type = "integer"

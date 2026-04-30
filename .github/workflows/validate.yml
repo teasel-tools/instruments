@@ -1,0 +1,30 @@
+name: Validate
+
+on:
+  pull_request:
+    paths:
+      - "instruments/**.toml"
+      - "index.toml"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Get changed TOML files
+        id: changed
+        uses: tj-actions/changed-files@v44
+        with:
+          files: |
+            instruments/**.toml
+
+      - name: Validate changed instrument TOMLs
+        if: steps.changed.outputs.any_changed == 'true'
+        run: |
+          python .github/scripts/validate_toml.py ${{ steps.changed.outputs.all_changed_files }}
