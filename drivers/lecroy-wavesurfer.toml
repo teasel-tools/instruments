@@ -36,20 +36,6 @@ required = false
 type = "string"
 
 [[config.params]]
-key = "LECROY_RESOURCE"
-description = "VISA resource string (USB connection)"
-example = "USB0::0x05FF::0x1023::12345::INSTR"
-required = false
-type = "string"
-
-[[config.params]]
-key = "LECROY_SUBNET"
-description = "Subnet for auto-discovery of the oscilloscope (e.g. 192.168.1.0/24)"
-example = "192.168.1.0/24"
-required = false
-type = "string"
-
-[[config.params]]
 key = "LECROY_PROBE_C1"
 description = "Probe attenuation ratio for channel 1 (e.g. 10 for 10x probe, 'none' to skip)"
 example = "10"
